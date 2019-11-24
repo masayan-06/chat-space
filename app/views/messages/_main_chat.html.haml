@@ -1,0 +1,29 @@
+.chat-main
+  .main-header
+    .main-header__left-box
+      .main-header__left-box__current-group
+        sample
+      .main-header__left-box__member-list
+        Member：
+        .main-header__left-box__member-list__member
+          seo neko
+    .main-header__edit-btn
+      =link_to "Edit", "#", class:"main-header__edit-btn__char"
+  .messages
+    .message
+      .message__upper-info
+        .message__upper-info__talker
+          seo
+        .message__upper-info__date
+          2016/09/21 06:16:55
+      .message__text
+        Hello World!
+  .form
+    .form__input
+      %form#new_message.input-box{"accept-charset": "UTF-8", action: "/groups/6700/messages", enctype: "multipart/form-data", method: "post"}
+        %input.input-box__text{name: "message[text]", placeholder: "type a message", type: "text"}/
+        %label.input-box__image{for: "message_image"}
+          %i.far.fa-image
+          %input#message_image.input-box__image__file{name: "message[image]", type: "file"}/
+      %input.submit-btn{type: "submit", value: "Send"}/
+      
