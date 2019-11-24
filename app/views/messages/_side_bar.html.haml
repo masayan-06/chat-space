@@ -1,0 +1,19 @@
+.chat-side
+  .side-header
+    .side-header__box
+      .side-header__box__user-name
+        seo
+      .side-header__box__menu
+        =link_to "#", class: "side-header__box__menu__new-group" do
+          =icon('fas', 'edit', class: "contents__btn--icon")
+          %span<>
+        =link_to "#", class: "side-header__box__menu__edit-user" do
+          =icon('fas', 'cog', class: "contents__btn--icon")
+          %span<>
+  .groups
+    .groups__chat
+      .groups__chat__title
+        sample
+      .groups__chat__messages
+        Good bye world!
+
