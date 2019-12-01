@@ -1,0 +1,20 @@
+.message
+  .message__upper-info
+    .message__upper-info__talker
+      = message.user.name
+    .message__upper-info__date
+      = message.created_at.strftime("%Y/%m/%d %H:%M")
+  .message__text
+    - if message.text.present?
+      %p.lower-message__content
+        = message.text
+    = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+
+    -# .message
+    -#   .message__upper-info
+    -#     .message__upper-info__talker
+    -#       seo
+    -#     .message__upper-info__date
+    -#       2016/09/21 06:16:55
+    -#   .message__text
+    -#     Hello World!

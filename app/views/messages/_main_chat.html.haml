@@ -2,28 +2,50 @@
   .main-header
     .main-header__left-box
       .main-header__left-box__current-group
-        sample
+        = @group.group_name
       .main-header__left-box__member-list
         Member：
         .main-header__left-box__member-list__member
-          seo neko
+          = @group.users.pluck(:name).join(", ")
     .main-header__edit-btn
-      =link_to "#", class:"main-header__edit-btn__char" do
+      =link_to edit_group_path(@group), class:"main-header__edit-btn__char" do
         edit
   .messages
-    .message
-      .message__upper-info
-        .message__upper-info__talker
-          seo
-        .message__upper-info__date
-          2016/09/21 06:16:55
-      .message__text
-        Hello World!
+    = render @messages
+    -# .message
+    -#   .message__upper-info
+    -#     .message__upper-info__talker
+    -#       seo
+    -#     .message__upper-info__date
+    -#       2016/09/21 06:16:55
+    -#   .message__text
+    -#     Hello World!
+  -# .form
+  -#   .form__input
+  -#     %form#new_message.input-box{"accept-charset": "UTF-8", action: "/groups/6700/messages", enctype: "multipart/form-data", method: "post"}
+  -#       %input.input-box__text{name: "message[text]", placeholder: "type a message", type: "text"}/
+  -#       %label.input-box__image{for: "message_image"}
+  -#         %i.far.fa-image
+  -#         %input#message_image.input-box__image__file{name: "message[image]", type: "file"}/
+  -#     %input.submit-btn{type: "submit", value: "Send"}/
+
+
+    -# .form
+    -#   = form_for [@group, @message] do |f|
+    -#     = f.text_field :content, class: 'form__message', placeholder: 'type a message'
+    -#     .form__mask
+    -#       = f.label :image, class: 'form__mask__image' do
+    -#         = icon('fas', 'image', class: 'icon')
+    -#         = f.file_field :image, class: 'hidden'
+    -#     = f.submit 'Send', class: 'form__submit'
+
+
   .form
     .form__input
-      %form#new_message.input-box{"accept-charset": "UTF-8", action: "/groups/6700/messages", enctype: "multipart/form-data", method: "post"}
-        %input.input-box__text{name: "message[text]", placeholder: "type a message", type: "text"}/
-        %label.input-box__image{for: "message_image"}
-          %i.far.fa-image
-          %input#message_image.input-box__image__file{name: "message[image]", type: "file"}/
-      %input.submit-btn{type: "submit", value: "Send"}/
+      .input-box
+        = form_for [@group, @message] do |f|
+          = f.text_field :text, class: 'input-box__text', placeholder: 'type a message'
+          = f.label :image, class: 'input-box__image' do
+            = icon('fas', 'image', class: 'icon')
+            = f.file_field :image, class: 'input-box__image__file'
+          = f.submit 'Send', class: 'submit-btn'
