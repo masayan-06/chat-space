@@ -2,54 +2,57 @@ $(function(){
   var buildHTML = function(message) {
     if (message.text && message.image) {
       //data-idが反映されるようにしている
-      var html = `<div class="message" data-message_id=` + message.id + `>` +
-        `<div class="message__upper-info">` +
-          `<div class="message__upper-info__talker">` +
-            message.user_name +
-          `</div>` +
-          `<div message__upper-info__date">` +
-            message.created_at +
-          `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-          `<p class="lower-message__content">` +
-            message.text +
-          `</p>` +
-          `<img src="` + message.image + `" class="lower-message__image" >` +
-        `</div>` +
-      `</div>`
+      var html = 
+      `<div class="message" data-message_id=${message.id}>
+                    <div class="message__upper-info">
+                      <div class="message__upper-info__talker">
+                        ${message.user_name}
+                      </div>
+                      <div message__upper-info__date">
+                        ${message.created_at}
+                      </div>
+                    </div>
+                    <div class="message__text">
+                      <p class="lower-message__content">
+                        ${message.text}
+                      </p>
+                      <img src=${message.image} class="lower-message__image">
+                    </div>
+                  </div>`
     } else if (message.text) {
       //同様に、data-idが反映されるようにしている
-      var html = `<div class="message" data-message_id=` + message.id + `>` +
-        `<div class="message__upper-info">` +
-          `<div class="message__upper-info__talker">` +
-            message.user_name +
-          `</div>` +
-          `<div class="message__upper-info__date">` +
-            message.created_at +
-          `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-          `<p class="lower-message__content">` +
-            message.text +
-          `</p>` +
-        `</div>` +
-      `</div>`
+      var html = 
+      `<div class="message" data-message_id=${message.id}>
+        <div class="message__upper-info">
+          <div class="message__upper-info__talker">
+            ${message.user_name}
+          </div>
+          <div class="message__upper-info__date">
+            ${message.created_at}
+          </div>
+        </div>
+        <div class="message__text">
+          <p class="lower-message__content">
+            ${message.text}
+          </p>
+        </div>
+      </div>`
     } else if (message.image) {
       //同様に、data-idが反映されるようにしている
-      var html = `<div class="message" data-message_id=` + message.id + `>` +
-        `<div class="message__upper-info">` +
-          `<div class="message__upper-info__talker">` +
-            message.user_name +
-          `</div>` +
-          `<div class="message__upper-info__date">` +
-            message.created_at +
-          `</div>` +
-        `</div>` +
-        `<div class="message__text">` +
-          `<img src="` + message.image + `" class="lower-message__image" >` +
-        `</div>` +
-      `</div>`
+      var html = 
+      `<div class="message" data-message_id=${message.id}>
+        <div class="message__upper-info">
+          <div class="message__upper-info__talker">
+            ${message.user_name}
+          </div>
+          <div class="message__upper-info__date">
+            ${message.created_at}
+          </div>
+        </div>
+        <div class="message__text">
+          <img src=${message.image} class="lower-message__image">
+        </div>
+      </div>`
     };
     return html;
   };
@@ -81,7 +84,7 @@ $(function(){
   var reloadMessages = function() {
     //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
     last_message_id = $('.message:last').data("message-id");
-    // console.log(last_message_id)
+
     $.ajax({
       //ルーティングで設定した通りのURLを指定
       url: "api/messages",
@@ -103,7 +106,7 @@ $(function(){
       $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight});
     })
     .fail(function() {
-      console.log('error');
+      alert('error');
     });
   };
   setInterval(reloadMessages, 7000);
